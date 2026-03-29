@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Print Module";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4" style="max-width:500px; margin:auto; border-radius:15px;">
+        
+        <h2 class="text-center mb-4 text-primary">🖨️ Print Order</h2>
+
+        <form asp-action="Upload" method="post" enctype="multipart/form-data">
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Upload PDF</label>
+                <input type="file" name="file" class="form-control" accept="application/pdf" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Print Type</label>
+                <select name="printType" class="form-select">
+                    <option value="bw">Black & White</option>
+                    <option value="color">Color</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Copies</label>
+                <input type="number" name="copies" class="form-control" value="1" min="1" />
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 fw-bold">
+                🚀 Submit Order
+            </button>
+
+        </form>
+    </div>
+</div>

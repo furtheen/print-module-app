@@ -1,0 +1,39 @@
+@using PrintModuleApp.Models
+@model List<Order>
+
+<div class="container mt-5">
+
+    <h2 class="text-center text-success mb-4">📋 Orders List</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover shadow">
+            <thead class="table-dark">
+                <tr>
+                    <th>File</th>
+                    <th>Pages</th>
+                    <th>Type</th>
+                    <th>Copies</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.FileName</td>
+                        <td>@item.Pages</td>
+                        <td>
+                            <span class="badge bg-info text-dark">
+                                @item.PrintType
+                            </span>
+                        </td>
+                        <td>@item.Copies</td>
+                        <td class="fw-bold text-success">₹@item.TotalPrice</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
