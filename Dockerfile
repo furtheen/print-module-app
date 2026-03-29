@@ -1,22 +1,19 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /src
+WORKDIR /app
 
-# Copy csproj first
-COPY PrintModuleApp/PrintModuleApp.csproj PrintModuleApp/
-WORKDIR /src/PrintModuleApp
+# Copy csproj
+COPY *.csproj ./
 RUN dotnet restore
 
-# Copy everything else
-WORKDIR /src
-COPY . .
-WORKDIR /src/PrintModuleApp
+# Copy everything
+COPY . ./
+RUN dotnet publish -c Release -o out
 
-RUN dotnet publish -c Release -o /app/publish
-
-# Runtime image
+# Runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
-COPY --from=build /app/publish .
+
+COPY --from=build /app/out .
 
 ENV ASPNETCORE_URLS=http://+:8080
 
